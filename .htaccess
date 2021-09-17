@@ -1,0 +1,34 @@
+RewriteEngine on
+
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ http://www.site.com/$1 [R,L]
+
+RewriteCond %{HTTP_HOST} ^site.com. [NC]
+RewriteRule ^(.*)$ http://www.site.com/$1 [L,R=301,NC]
+
+
+#Seo url oluşturma
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+RewriteRule ^([a-z]{2})/anasayfa index.php?lang=$1 [L]
+#RewriteRule ^([a-z]{2})/home index.php?lang=$1 [L]
+#RewriteRule ^([a-z]{2})/aboutus hakkimizda.php?lang=$1 [L]
+#RewriteRule ^([a-z]{2})/contact iletisim.php?lang=$1 [L]
+#RewriteRule ^([a-z]{2})/portfolio portfolyo.php?lang=$1 [L]
+
+#ReWriteRule ^([a-z]{2})/portfolyo/(.*)/(.*)/(.*) portfolyo-detay.php?lang=$1&catName=$2&adi=$3&id=$4 [L]
+#ReWriteRule ^([a-z]{2})/portfolio/(.*)/(.*)/(.*) portfolyo-detay.php?lang=$1&catName=$2&adi=$3&id=$4 [L,NC]
+RewriteRule ^([a-z]{2})/(.*) $2.php?lang=$1 [L,NC]
+ReWriteRule ^sitemap.xml sitemap.php
+
+
+
+#404 hata sayfası yönlendirme kodu
+#ErrorDocument 404 http://www.site.com/404
+
+
+
+
+
+
