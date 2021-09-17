@@ -123,7 +123,7 @@ $controllerName = "anasayfa";
                                         <span class="badge  <?php if ($getData['aktif_ar'] == 1) {echo "badge-success";} else {echo "badge-danger";} ?>">AR</span>
                                     </td>
                                     <td class="font-w600"><?= $getData['adi_tr'] ?> </td>
-                                    <td class="font-w600 d-none d-sm-table-cell"><?= substr($getData["aciklama_tr"], 0, 90 )."..."; ?></td>
+                                    <td class="font-w600 d-none d-sm-table-cell"><?=substr(strip_tags($getData["aciklama_tr"]), 0, 50 )."...";?></td>
                                     <td class="font-w600"><span class="badge  <?php if($getData['aktif']==1){echo "badge-info";}else{echo "badge-danger";} ?>"><?php if($getData['aktif']==1){echo "Aktif";}else{echo "Pasif";} ?></span></td>
                                     <td class="text-center">
                                         <div class="btn-group">

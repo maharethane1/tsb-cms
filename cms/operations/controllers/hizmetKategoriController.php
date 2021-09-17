@@ -8,7 +8,7 @@ include('../functions/functionImgExtension.php');
 include('../functions/clearCharacter.php');
 
 #Log kayıtları için dataları değişkene aktar
-$performName = "Hizmetler Kategori Yönetimi";
+$performName = "Haberler Kategori Yönetimi";
 $userName = $_COOKIE['userName'];
 $userID = $_COOKIE['userID'];
 
@@ -140,13 +140,13 @@ if (isset($_POST['add'])) {
 
             #Log kaydetme işlemi başarılı ise geri dön
             if ($saveLog) {
-                Header("Location: ../../views/hizmet-kategori?statu=ok");
+                Header("Location: ../../views/haber-kategori?statu=ok");
             } else {
-                Header("Location: ../../views/hizmet-kategori?statu=logNo");
+                Header("Location: ../../views/haber-kategori?statu=logNo");
             }
         } else {
 
-            Header("Location: ../../views/hizmet-kategori?statu=no");
+            Header("Location: ../../views/haber-kategori?statu=no");
         }
     }catch (PDOException $e) {
         echo $e->getMessage();
@@ -283,13 +283,13 @@ if (isset($_POST['edit'])) {
 
             #Log kaydetme işlemi başarılı ise geri dön
             if ($saveLog) {
-                Header("Location: ../../views/hizmet-kategori?statu=ok");
+                Header("Location: ../../views/haber-kategori?statu=ok");
             } else {
-                Header("Location: ../../views/hizmet-kategori?statu=logNo");
+                Header("Location: ../../views/haber-kategori?statu=logNo");
             }
         } else {
 
-            Header("Location: ../../views/hizmet-kategori?statu=no");
+            Header("Location: ../../views/haber-kategori?statu=no");
         }
     }catch (PDOException $e) {
         echo $e->getMessage();
@@ -314,7 +314,7 @@ if ($_GET["perform"] == "delete") {
     $countCat = $checkCat->fetchColumn();
 
     if ($countCat>0) {
-        return Header("Location: ../../views/hizmet-kategori?statu=hasSubCat");
+        return Header("Location: ../../views/haber-kategori?statu=hasSubCat");
     }
 
     try
@@ -344,13 +344,13 @@ if ($_GET["perform"] == "delete") {
 
         #Log kaydetme işlemi başarılı ise geri dön
         if ($saveLog) {
-            Header("Location: ../../views/hizmet-kategori?statu=ok");
+            Header("Location: ../../views/haber-kategori?statu=ok");
         } else {
-            Header("Location: ../../views/hizmet-kategori?statu=logNo");
+            Header("Location: ../../views/haber-kategori?statu=logNo");
         }
 
     } else {
-        header("Location: ../../views/hizmet-kategori?statu=no");
+        header("Location: ../../views/haber-kategori?statu=no");
     }}catch (PDOException $e) {
         echo $e->getMessage();
     }

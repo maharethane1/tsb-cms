@@ -8,7 +8,7 @@ include('../functions/functionImgExtension.php');
 include('../functions/clearCharacter.php');
 
 #Log kayıtları için dataları değişkene aktar
-$performName = "Hizmetler (Basic) Sayfa Yönetimi";
+$performName = "Sektörler Sayfa Yönetimi";
 $userName = $_COOKIE['userName'];
 $userID = $_COOKIE['userID'];
 
@@ -34,9 +34,9 @@ if ( isset($_POST['addPage']) ) {
         $benzersizsayi1 = rand(20000, 32000);
         $benzersizsayi2 = rand(20000, 32000);
         $benzersizsayi3 = rand(20000, 32000);
-        $benzersizad = $resimadi . "-hizmetler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
-        $benzersizad2 = "t1-" . $resimadi . "-hizmetler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
-        $benzersizad3 = "t2-" . $resimadi . "-hizmetler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
+        $benzersizad = $resimadi . "-sektorler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
+        $benzersizad2 = "t1-" . $resimadi . "-sektorler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
+        $benzersizad3 = "t2-" . $resimadi . "-sektorler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
 
         #thumbnail
         $image = new SimpleImage();
@@ -160,15 +160,15 @@ if ( isset($_POST['addPage']) ) {
             
             #Log kaydetme işlemi başarılı ise geri dön
             if($saveLog){
-                Header("Location: ../../views/hizmetler?statu=ok");
+                Header("Location: ../../views/sektorler?statu=ok");
             }else{
-                Header("Location: ../../views/hizmetler?statu=logNo");
+                Header("Location: ../../views/sektorler?statu=logNo");
             }
 
             
         } else {
 
-            Header("Location: ../../views/hizmetler?statu=no");
+            Header("Location: ../../views/sektorler?statu=no");
         }
     }catch (PDOException $e) {
         echo $e->getMessage();
@@ -201,9 +201,9 @@ if ( isset($_POST['addPage']) ) {
         $benzersizsayi1 = rand(20000, 32000);
         $benzersizsayi2 = rand(20000, 32000);
         $benzersizsayi3 = rand(20000, 32000);
-        $benzersizad = $resimadi . "-hizmetler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
-        $benzersizad2 = "t1-" . $resimadi . "-hizmetler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
-        $benzersizad3 = "t2-" . $resimadi . "-hizmetler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
+        $benzersizad = $resimadi . "-sektorler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
+        $benzersizad2 = "t1-" . $resimadi . "-sektorler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
+        $benzersizad3 = "t2-" . $resimadi . "-sektorler-icerik-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
 
         #thumbnail
         $image = new SimpleImage();
@@ -325,15 +325,15 @@ if ( isset($_POST['addPage']) ) {
 
             #Log kaydetme işlemi başarılı ise geri dön
             if ($saveLog) {
-                Header("Location: ../../views/hizmetler?statu=ok");
+                Header("Location: ../../views/sektorler?statu=ok");
             } else {
-                Header("Location: ../../views/hizmetler?statu=logNo");
+                Header("Location: ../../views/sektorler?statu=logNo");
             }
 
             
         } else {
 
-            Header("Location: ../../views/hizmetler?statu=no");
+            Header("Location: ../../views/sektorler?statu=no");
         }
     }catch (PDOException $e) {
         echo $e->getMessage();
@@ -373,19 +373,19 @@ if ($_GET["perform"] == "delete") {
         
         #Log kaydetme işlemi başarılı ise geri dön
         if($saveLog){
-            Header("Location: ../../views/hizmetler?statu=ok");
+            Header("Location: ../../views/sektorler?statu=ok");
         }else{
-            Header("Location: ../../views/hizmetler?statu=logNo");
+            Header("Location: ../../views/sektorler?statu=logNo");
         }
 
         if($saveLog) {
-            header("Location: ../../views/hizmetler?statu=ok");
+            header("Location: ../../views/sektorler?statu=ok");
         }else{
-            header("Location: ../../views/hizmetler?statu=logNo");
+            header("Location: ../../views/sektorler?statu=logNo");
         }
 
     }else{
-        header("Location: ../../views/hizmetler?statu=no");
+        header("Location: ../../views/sektorler?statu=no");
     }
 
 }

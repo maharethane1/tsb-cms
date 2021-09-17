@@ -59,6 +59,25 @@ if ( isset($_POST['add']) ) {
         $benzersizad = "noimage.jpg";
     }
 
+    if ($_FILES['dokuman']['size']>0) {
+        #Dosya yükleme yolu belirleme ve dosya adı temizleme
+        $uploads_dir = '../../../uploads/';
+        @$tmp_name = $_FILES['dokuman']["tmp_name"];
+        @$adi = temizle($adi);
+        @$dosya = $_FILES['dokuman']["name"];
+        @$uzanti = extens($dosya);
+        $dosya_boyutu = filesize($tmp_name);
+        #Benzersiz oluşturma
+        $dokumanbenzersizsayi1 = rand(20000, 32000);
+        $dokumanbenzersizsayi2 = rand(20000, 32000);
+        $dokumanbenzersizsayi3 = rand(20000, 32000);
+        $dokumanbenzersizad = $adi . "-urun-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
+
+        @move_uploaded_file($tmp_name, "$uploads_dir/$dokumanbenzersizad");
+    }else {
+        $dokumanbenzersizad=NULL;
+    }
+
     try
     {
         ##Database kaydı
@@ -100,6 +119,7 @@ if ( isset($_POST['add']) ) {
             video_aktif=:video_aktif,
             video=:video,
             gorsel=:gorsel,
+            dokuman= :dokuman,
             aktif=:aktif
             ");
             
@@ -141,6 +161,7 @@ if ( isset($_POST['add']) ) {
             'video_aktif' => $_POST['video_aktif'],
             'video' => $_POST['video'],
             'gorsel' => $benzersizad,
+            'dokuman' => $dokumanbenzersizad,
 
             'aktif' => $_POST['aktif']
         ));
@@ -202,6 +223,8 @@ if ( isset($_POST['add']) ) {
     #Eski görsel yüklü ise oldImage değişkenine aktar
     $oldImage = $_POST['old-image'];
 
+    $oldDocument = $_POST['old-document'];
+
     // gorsel yükleme
     if ($_FILES['resim']['size']>0) {
         
@@ -236,6 +259,24 @@ if ( isset($_POST['add']) ) {
     } else {
         $benzersizad = $oldImage;
     }
+     if ($_FILES['dokuman']['size']>0) {
+         #Dosya yükleme yolu belirleme ve dosya adı temizleme
+         $uploads_dir = '../../../uploads/';
+         @$tmp_name = $_FILES['dokuman']["tmp_name"];
+         @$adi = temizle($adi);
+         @$dosya = $_FILES['dokuman']["name"];
+         @$uzanti = extens($dosya);
+         $dosya_boyutu = filesize($tmp_name);
+         #Benzersiz oluşturma
+         $dokumanbenzersizsayi1 = rand(20000, 32000);
+         $dokumanbenzersizsayi2 = rand(20000, 32000);
+         $dokumanbenzersizsayi3 = rand(20000, 32000);
+         $dokumanbenzersizad = $adi . "-urun-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
+
+         @move_uploaded_file($tmp_name, "$uploads_dir/$dokumanbenzersizad");
+     }else {
+         $dokumanbenzersizad=$oldDocument;
+     }
     
     try
     {
@@ -278,6 +319,7 @@ if ( isset($_POST['add']) ) {
             video_aktif=:video_aktif,
             video=:video,
             gorsel=:gorsel,
+            dokuman=:dokuman,
             aktif=:aktif
             WHERE id=:id
             ");
@@ -319,6 +361,7 @@ if ( isset($_POST['add']) ) {
             'video_aktif' => $_POST['video_aktif'],
             'video' => $_POST['video'],
             'gorsel' => $benzersizad,
+            'dokuman' => $dokumanbenzersizad,
 
             'aktif' => $_POST['aktif'],
             'id' => $_POST['id']

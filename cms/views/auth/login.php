@@ -54,6 +54,7 @@ if ($_COOKIE['loggedUser'] == "ok") {
                             </div>
 
                             <form class="js-validation-signin px-30" method="post" action="../../operations/controllers/loginCheck">
+                                <?=$csrf_token;?>
                                 <div class="form-group row">
                                     <div class="col-12">
                                         <div class="form-material floating">

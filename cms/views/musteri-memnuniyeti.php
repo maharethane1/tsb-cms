@@ -2,7 +2,7 @@
 
 $authPageName = "setting";
 $activeClass ="yorumlar";
-$pageTitle = "Maharethane - Kullanıcı Yorumları";
+$pageTitle = "Maharethane - Müşteri Memnuniyeti";
 include('layouts/header.php');
 include('../operations/middleware/AuthorizationMiddleware.php');
 $perform = $_GET['perform'];
@@ -17,8 +17,8 @@ $controllerName="yorumlar";
         <div class="block block-transparent bg-video" data-vide-bg="assets/media/videos/city_night" data-vide-options="posterType: jpg" style="position: relative;"><div style="position: absolute; z-index: -1; inset: 0px; overflow: hidden; background-size: cover; background-color: transparent; background-repeat: no-repeat; background-position: 50% 50%; background-image: none;"><video autoplay="" loop="" muted="" style="margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%); visibility: visible; opacity: 1; width: 1154px; height: auto;"><source src="assets/media/videos/city_night.mp4" type="video/mp4"><source src="assets/media/videos/city_night.webm" type="video/webm"><source src="assets/media/videos/city_night.ogv" type="video/ogg"></video></div>
             <div class="block-content bg-primary-dark-op">
                 <div class="py-20 text-center">
-                    <h1 class="font-w700 text-white mb-10">Kullanıcı Yorumları Yönetimi</h1>
-                    <h2 class="h4 font-w400 text-white-op">Sistemde bulunan kullanıcı yorumlarını bu sayfadan yönetebilirsiniz.</h2>
+                    <h1 class="font-w700 text-white mb-10">Müşteri Memnuniyeti Yönetimi</h1>
+                    <h2 class="h4 font-w400 text-white-op">Sistemde bulunan müşteri memnuniyetleribi bu sayfadan yönetebilirsiniz.</h2>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@ $controllerName="yorumlar";
                                         <span class="badge  <?php if ($getData['aktif_ar'] == 1) {echo "badge-success";} else {echo "badge-danger";} ?>">AR</span>
                                     </td>
                                     <td class="font-w600"><?= $getData['adi_tr'] ?> </td>
-                                    <td class="font-w600 d-none d-sm-table-cell"><?= substr($getData["aciklama_tr"], 0, 90) ?> ...</td>
+                                    <td class="font-w600 d-none d-sm-table-cell"><?=substr(strip_tags($getData["aciklama_tr"]), 0, 50 )."...";?></td>
                                     <td class="font-w600 d-none d-sm-table-cell"><span class="badge  <?php if($getData['aktif']==1){echo "badge-info";}elseif($getData['aktif']==0){echo "badge-danger";} ?>"><?php if($getData['aktif']==1){echo "Aktif";}elseif($getData['aktif']==0){echo "Pasif";} ?></span></td>
                                     <td class="text-center">
                                         <div class="btn-group">
@@ -347,7 +347,7 @@ $controllerName="yorumlar";
                         <div class="block-options">
                             <div class="block-options-item">
                             <button type="submit" name="add" class="btn btn-sm btn-alt-primary"><i class="fa fa-check"></i> Kaydet</button>
-                            <a href="kullanici-yorumlari"><button type="button" class="btn btn-sm btn-alt-danger"><i class="fa fa-close"></i> İptal</button></a>
+                            <a href="musteri-memnuniyeti"><button type="button" class="btn btn-sm btn-alt-danger"><i class="fa fa-close"></i> İptal</button></a>
                             </div>
                         </div>
                     </div>
@@ -625,7 +625,7 @@ $controllerName="yorumlar";
                     <div class="block-options">
                         <div class="block-options-item">
                         <button type="submit" name="edit" class="btn btn-sm btn-alt-primary"><i class="fa fa-check"></i> Kaydet</button>
-                        <a href="kullanici-yorumlari"><button type="button" class="btn btn-sm btn-alt-danger"><i class="fa fa-close"></i> İptal</button></a>
+                        <a href="musteri-memnuniyeti"><button type="button" class="btn btn-sm btn-alt-danger"><i class="fa fa-close"></i> İptal</button></a>
                         </div>
                     </div>
                 </div>

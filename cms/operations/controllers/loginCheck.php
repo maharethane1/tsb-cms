@@ -5,6 +5,9 @@ ob_start();
 include('../../../connection/connect.php');
 
 if (isset($_POST['loginCheck'])) {
+
+    //TODO: implement CSRF protection
+
     $userName = $_POST['username'];
     $userPassword = md5(md5(md5($_POST['password'])));
     $session  = $_POST['session'];

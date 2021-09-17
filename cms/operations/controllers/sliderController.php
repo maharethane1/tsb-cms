@@ -9,7 +9,7 @@ include('../functions/clearCharacter.php');
 include('../functions/getInput.php');
 
 #Log kayıtları için dataları değişkene aktar
-$performName = "Slider Yönetimi";
+$performName = "Döküman Yönetimi";
 $userName = $_COOKIE['userName'];
 $userID = $_COOKIE['userID'];
 
@@ -19,11 +19,24 @@ if (isset($_POST['add'])) {
 
     $adi = $_POST['adi_tr'];
 
-    $benzersizadtr = uploadImage("slider", "resim", "tr");
-    $benzersizaden = uploadImage("slider", "resim", "en");
-    $benzersizadfr = uploadImage("slider", "resim", "fr");
-    $benzersizades = uploadImage("slider", "resim", "es");
-    $benzersizadar = uploadImage("slider", "resim", "ar");
+    if ($_FILES['dokuman']['size']>0) {
+        #Dosya yükleme yolu belirleme ve dosya adı temizleme
+        $uploads_dir = '../../../uploads/';
+        @$tmp_name = $_FILES['dokuman']["tmp_name"];
+        @$adi = temizle($adi);
+        @$dosya = $_FILES['dokuman']["name"];
+        @$uzanti = extens($dosya);
+        $dosya_boyutu = filesize($tmp_name);
+        #Benzersiz oluşturma
+        $dokumanbenzersizsayi1 = rand(20000, 32000);
+        $dokumanbenzersizsayi2 = rand(20000, 32000);
+        $dokumanbenzersizsayi3 = rand(20000, 32000);
+        $dokumanbenzersizad = $adi . "-dokuman-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
+
+        @move_uploaded_file($tmp_name, "$uploads_dir/$dokumanbenzersizad");
+    }else {
+        $dokumanbenzersizad=NULL;
+    }
 
     try
     {
@@ -31,79 +44,42 @@ if (isset($_POST['add'])) {
         $savePage = $db->prepare("INSERT INTO tbl_slider SET
 
             baslik_1_tr=:baslik_1_tr,
-            baslik_2_tr=:baslik_2_tr,
-            buton_tr=:buton_tr,
-            link_tr=:link_tr,
-            gorsel_tr=:gorsel_tr,
             aktif_tr=:aktif_tr,
             
             baslik_1_en=:baslik_1_en,
-            baslik_2_en=:baslik_2_en,
-            buton_en=:buton_en,
-            link_en=:link_en,
-            gorsel_en=:gorsel_en,
             aktif_en=:aktif_en,
 
             baslik_1_fr=:baslik_1_fr,
-            baslik_2_fr=:baslik_2_fr,
-            buton_fr=:buton_fr,
-            link_fr=:link_fr,
-            gorsel_fr=:gorsel_fr,
             aktif_fr=:aktif_fr,
 
             baslik_1_es=:baslik_1_es,
-            baslik_2_es=:baslik_2_es,
-            buton_es=:buton_es,
-            link_es=:link_es,
-            gorsel_es=:gorsel_es,
             aktif_es=:aktif_es,
 
             baslik_1_ar=:baslik_1_ar,
-            baslik_2_ar=:baslik_2_ar,
-            buton_ar=:buton_ar,
-            link_ar=:link_ar,
-            gorsel_ar=:gorsel_ar,
             aktif_ar=:aktif_ar,
-
+            dokuman=:dokuman,
+                           
             aktif=:aktif
             ");
 
         $savePage->execute(array(
 
             'baslik_1_tr' => $_POST['baslik_1_tr'],
-            'baslik_2_tr' => $_POST['baslik_2_tr'],
-            'buton_tr' => $_POST['buton_tr'],
-            'link_tr' => $_POST['link_tr'],
-            'gorsel_tr' => $benzersizadtr,
             'aktif_tr' => $_POST['aktif_tr'],
 
             'baslik_1_en' => $_POST['baslik_1_en'],
-            'baslik_2_en' => $_POST['baslik_2_en'],
-            'buton_en' => $_POST['buton_en'],
-            'link_en' => $_POST['link_en'],
-            'gorsel_en' => $benzersizaden,
             'aktif_en' => $_POST['aktif_en'],
 
             'baslik_1_fr' => $_POST['baslik_1_fr'],
-            'baslik_2_fr' => $_POST['baslik_2_fr'],
-            'buton_fr' => $_POST['buton_fr'],
-            'link_fr' => $_POST['link_fr'],
-            'gorsel_fr' => $benzersizadfr,
             'aktif_fr' => $_POST['aktif_fr'],
 
             'baslik_1_es' => $_POST['baslik_1_es'],
-            'baslik_2_es' => $_POST['baslik_2_es'],
-            'buton_es' => $_POST['buton_es'],
-            'link_es' => $_POST['link_es'],
-            'gorsel_es' => $benzersizades,
             'aktif_es' => $_POST['aktif_es'],
 
             'baslik_1_ar' => $_POST['baslik_1_ar'],
-            'baslik_2_ar' => $_POST['baslik_2_ar'],
-            'buton_ar' => $_POST['buton_ar'],
-            'link_ar' => $_POST['link_ar'],
-            'gorsel_ar' => $benzersizadar,
             'aktif_ar' => $_POST['aktif_ar'],
+
+            'dokuman' => $dokumanbenzersizad,
 
             'aktif' => $_POST['aktif']
         ));
@@ -135,9 +111,9 @@ if (isset($_POST['add'])) {
 
             #Log kaydetme işlemi başarılı ise geri dön
             if($saveLog){
-                Header("Location: ../../views/slider?statu=ok");
+                Header("Location: ../../views/dokuman?statu=ok");
             }else{
-                Header("Location: ../../views/slider?statu=logNo");
+                Header("Location: ../../views/dokuman?statu=logNo");
             }
         }
 
@@ -156,11 +132,26 @@ if (isset($_POST['edit'])) {
 
     $adi = $_POST['adi_tr'];
 
-    $benzersizadtr = editImage("slider", "resim", "0");
-    $benzersizaden = editImage("slider", "resim", "1");
-    $benzersizadfr = editImage("slider", "resim", "2");
-    $benzersizades = editImage("slider", "resim", "3");
-    $benzersizadar = editImage("slider", "resim", "4");
+    $oldDocument = $_POST['old-document'];
+
+    if ($_FILES['dokuman']['size']>0) {
+        #Dosya yükleme yolu belirleme ve dosya adı temizleme
+        $uploads_dir = '../../../uploads/';
+        @$tmp_name = $_FILES['dokuman']["tmp_name"];
+        @$adi = temizle($adi);
+        @$dosya = $_FILES['dokuman']["name"];
+        @$uzanti = extens($dosya);
+        $dosya_boyutu = filesize($tmp_name);
+        #Benzersiz oluşturma
+        $dokumanbenzersizsayi1 = rand(20000, 32000);
+        $dokumanbenzersizsayi2 = rand(20000, 32000);
+        $dokumanbenzersizsayi3 = rand(20000, 32000);
+        $dokumanbenzersizad = $adi . "-dokuman-" . $benzersizsayi1 . $benzersizsayi2 . $benzersizsayi3 . "." . $uzanti;
+
+        @move_uploaded_file($tmp_name, "$uploads_dir/$dokumanbenzersizad");
+    }else {
+        $dokumanbenzersizad=$oldDocument;
+    }
 
     try
     {
@@ -168,39 +159,21 @@ if (isset($_POST['edit'])) {
         $savePage = $db->prepare("UPDATE tbl_slider SET
 
             baslik_1_tr=:baslik_1_tr,
-            baslik_2_tr=:baslik_2_tr,
-            buton_tr=:buton_tr,
-            link_tr=:link_tr,
-            gorsel_tr=:gorsel_tr,
             aktif_tr=:aktif_tr,
             
             baslik_1_en=:baslik_1_en,
-            baslik_2_en=:baslik_2_en,
-            buton_en=:buton_en,
-            link_en=:link_en,
-            gorsel_en=:gorsel_en,
             aktif_en=:aktif_en,
 
             baslik_1_fr=:baslik_1_fr,
-            baslik_2_fr=:baslik_2_fr,
-            buton_fr=:buton_fr,
-            link_fr=:link_fr,
-            gorsel_fr=:gorsel_fr,
             aktif_fr=:aktif_fr,
 
             baslik_1_es=:baslik_1_es,
-            baslik_2_es=:baslik_2_es,
-            buton_es=:buton_es,
-            link_es=:link_es,
-            gorsel_es=:gorsel_es,
             aktif_es=:aktif_es,
 
             baslik_1_ar=:baslik_1_ar,
-            baslik_2_ar=:baslik_2_ar,
-            buton_ar=:buton_ar,
-            link_ar=:link_ar,
-            gorsel_ar=:gorsel_ar,
             aktif_ar=:aktif_ar,
+            
+            dokuman=:dokuman,
 
             aktif=:aktif
             WHERE id=:id
@@ -209,39 +182,20 @@ if (isset($_POST['edit'])) {
         $savePage->execute(array(
 
             'baslik_1_tr' => $_POST['baslik_1_tr'],
-            'baslik_2_tr' => $_POST['baslik_2_tr'],
-            'buton_tr' => $_POST['buton_tr'],
-            'link_tr' => $_POST['link_tr'],
-            'gorsel_tr' => $benzersizadtr,
             'aktif_tr' => $_POST['aktif_tr'],
 
             'baslik_1_en' => $_POST['baslik_1_en'],
-            'baslik_2_en' => $_POST['baslik_2_en'],
-            'buton_en' => $_POST['buton_en'],
-            'link_en' => $_POST['link_en'],
-            'gorsel_en' => $benzersizaden,
             'aktif_en' => $_POST['aktif_en'],
 
             'baslik_1_fr' => $_POST['baslik_1_fr'],
-            'baslik_2_fr' => $_POST['baslik_2_fr'],
-            'buton_fr' => $_POST['buton_fr'],
-            'link_fr' => $_POST['link_fr'],
-            'gorsel_fr' => $benzersizadfr,
             'aktif_fr' => $_POST['aktif_fr'],
 
             'baslik_1_es' => $_POST['baslik_1_es'],
-            'baslik_2_es' => $_POST['baslik_2_es'],
-            'buton_es' => $_POST['buton_es'],
-            'link_es' => $_POST['link_es'],
-            'gorsel_es' => $benzersizades,
             'aktif_es' => $_POST['aktif_es'],
 
             'baslik_1_ar' => $_POST['baslik_1_ar'],
-            'baslik_2_ar' => $_POST['baslik_2_ar'],
-            'buton_ar' => $_POST['buton_ar'],
-            'link_ar' => $_POST['link_ar'],
-            'gorsel_ar' => $benzersizadar,
             'aktif_ar' => $_POST['aktif_ar'],
+            'dokuman' => $_POST['dokuman'],
 
             'aktif' => $_POST['aktif'],
             'id' => $_POST['id']
@@ -274,9 +228,9 @@ if (isset($_POST['edit'])) {
 
             #Log kaydetme işlemi başarılı ise geri dön
             if($saveLog){
-                Header("Location: ../../views/slider?statu=ok");
+                Header("Location: ../../views/dokuman?statu=ok");
             }else{
-                Header("Location: ../../views/slider?statu=logNo");
+                Header("Location: ../../views/dokuman?statu=logNo");
             }
         }
 
@@ -319,18 +273,18 @@ if ($_GET["perform"] == "delete") {
 
         #Log kaydetme işlemi başarılı ise geri dön
         if ($saveLog) {
-            Header("Location: ../../views/slider?statu=ok");
+            Header("Location: ../../views/dokuman?statu=ok");
         } else {
-            Header("Location: ../../views/slider?statu=logNo");
+            Header("Location: ../../views/dokuman?statu=logNo");
         }
 
         if ($saveLog) {
-            header("Location: ../../views/slider?statu=ok");
+            header("Location: ../../views/dokuman?statu=ok");
         } else {
-            header("Location: ../../views/slider?statu=logNo");
+            header("Location: ../../views/dokuman?statu=logNo");
         }
     } else {
-        header("Location: ../../views/slider?statu=no");
+        header("Location: ../../views/dokuman?statu=no");
     }
 }
 

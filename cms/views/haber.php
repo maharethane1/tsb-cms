@@ -2,7 +2,7 @@
 
 $authPageName = "content";
 $activeClass ="hizmet";
-$pageTitle = "Maharethane - Hizmetler Yönetimi";
+$pageTitle = "Maharethane - Haberler Yönetimi";
 include('layouts/header.php');
 include('../operations/middleware/AuthorizationMiddleware.php');
 $perform = $_GET['perform'];
@@ -40,8 +40,8 @@ $contentID = $_GET['id'];
             form_data.append('file', file_obj);
             form_data.append('imageUpload', '');
             form_data.append('contentID', <?= $contentID ?>);
-            form_data.append('pageName', 'hizmet');
-            form_data.append('performName', 'Hizmetler yönetimi');
+            form_data.append('pageName', 'haber');
+            form_data.append('performName', 'Haberler yönetimi');
             form_data.append('columnName', 'hizmet_id');
             $.ajax({
                 type: 'POST',
@@ -80,8 +80,8 @@ $contentID = $_GET['id'];
         <div class="block block-transparent bg-video" data-vide-bg="assets/media/videos/city_night" data-vide-options="posterType: jpg" style="position: relative;"><div style="position: absolute; z-index: -1; inset: 0px; overflow: hidden; background-size: cover; background-color: transparent; background-repeat: no-repeat; background-position: 50% 50%; background-image: none;"><video autoplay="" loop="" muted="" style="margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%); visibility: visible; opacity: 1; width: 1154px; height: auto;"><source src="assets/media/videos/city_night.mp4" type="video/mp4"><source src="assets/media/videos/city_night.webm" type="video/webm"><source src="assets/media/videos/city_night.ogv" type="video/ogg"></video></div>
             <div class="block-content bg-primary-dark-op">
                 <div class="py-20 text-center">
-                    <h1 class="font-w700 text-white mb-10">Hizmetler Sayfa Yönetimi</h1>
-                    <h2 class="h4 font-w400 text-white-op">Hizmetler sayfası içeriklerini bu alandan yönetebilirsiniz.</h2>
+                    <h1 class="font-w700 text-white mb-10">Haberler Sayfa Yönetimi</h1>
+                    <h2 class="h4 font-w400 text-white-op">Haberler sayfası içeriklerini bu alandan yönetebilirsiniz.</h2>
                 </div>
             </div>
         </div>
@@ -92,7 +92,7 @@ $contentID = $_GET['id'];
             <!-- Kayıtlı içerikleri görüntüleme -->
             <div class="block">
                 <div class="block-header block-header-default">
-                    <h3 class="block-title">HİZMETLER</h3>
+                    <h3 class="block-title">HABERLER</h3>
                     <div class="block-options">
                         <div class="block-options-item">
                             <a href="?perform=add"> <button class="btn btn-sm btn-hero btn-outline-secondary"> YENİ EKLE</button></a>
@@ -104,8 +104,8 @@ $contentID = $_GET['id'];
                         <thead>
                             <tr>
                                 <th class="text-center d-none d-sm-table-cell">Dil Durum</th>
-                                <th>Ürün Adı</th>
-                                <th class="d-none d-sm-table-cell">Kategori/Alt Kategori</th>
+                                <th>Haber Başlığı</th>
+                                <th class="d-none d-sm-table-cell">Kategori</th>
                                 <th class="d-none d-sm-table-cell">Durum</th>
                                 <th class="text-center" style="width: 15%;">İşlem</th>
                                 <th class="text-center" style="width: 5%;">Taşı</th>
@@ -129,15 +129,15 @@ $contentID = $_GET['id'];
                                         <span class="badge  <?php if ($getData['aktif_fr'] == 1) {echo "badge-success";} else {echo "badge-danger";} ?>">FR</span>
                                         <span class="badge  <?php if ($getData['aktif_ar'] == 1) {echo "badge-success";} else {echo "badge-danger";} ?>">AR</span>
                                     </td>
-                                    <td class="font-w600"><?= $getData['adi_tr'] ?> </td>
-                                    <td class="font-w600 d-none d-sm-table-cell"><?= $getData["kategori_adi"] ?> <?php if(isset($getData['alt_kat_adi'])){ echo "/ ".$getData['alt_kat_adi'];} ?> </td>
+                                    s
+                                    <td class="font-w600 d-none d-sm-table-cell"><?= $getData["kategori_adi"] ?> </td>
                                     <td class="font-w600 d-none d-sm-table-cell"><span class="badge  <?php if($getData['aktif']==1){echo "badge-info";}elseif($getData['aktif']==0){echo "badge-danger";} ?>"><?php if($getData['aktif']==1){echo "Aktif";}elseif($getData['aktif']==0){echo "Pasif";} ?></span></td>
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="?perform=edit&id=<?= $getData["id"] ?>"><button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="İçerik Düzenle" data-placement="bottom">
                                                     <i class="fa fa-pencil"></i>
                                                 </button></a>
-                                            <a href="?perform=foto&id=<?= $getData["id"] ?>&pageName=hizmet"><button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Galeri" data-placement="bottom">
+                                            <a href="?perform=foto&id=<?= $getData["id"] ?>&pageName=haber"><button type="button" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Galeri" data-placement="bottom">
                                                     <i class="fa fa-photo"></i>
                                                 </button></a>
                                             <a href="../operations/controllers/hizmetController?perform=delete&id=<?= $getData["id"]; ?>&adi=<?= $getData["adi_tr"]; ?>" onclick="return confirm('<?= $getData['adi_tr']; ?> Adlı Kaydı Silmek İstediğinize Eminmisiniz? ')">
@@ -400,10 +400,10 @@ $contentID = $_GET['id'];
                         </div>
                         <!-- üst kategori seçme alanı -->
                         <div class="form-group row">
-                            <label class="col-lg-2 col-form-label">Üst Kategori</label>
+                            <label class="col-lg-2 col-form-label">Kategori</label>
                             <div class="col-lg-4">
                                 <select id="services-category"  class="form-control" name="kategori_id" required>
-                                <option value=""> Üst kategori seçimi yapın... </option>
+                                <option value=""> Kategori seçimi yapın... </option>
                                     <?php 
                                             
                                     #Sayfa bilgilerini database den çek
@@ -421,13 +421,13 @@ $contentID = $_GET['id'];
                             </div>
                         </div>
                         <!-- alt kategori seçme alanı -->
-                        <div class="form-group row">
+                        <!--<div class="form-group row">
                             <label class="col-lg-2 col-form-label">Alt Kategori</label>
                             <div class="col-lg-4">
                                 <select id="services-sub-category"  class="form-control" name="alt_kategori_id">
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
                         <!-- görsel alanı -->
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label" >Görsel</label>
@@ -459,7 +459,7 @@ $contentID = $_GET['id'];
                             <div class="block-options">
                                 <div class="block-options-item">
                                     <button type="submit" name="add" class="btn btn-sm btn-alt-primary"><i class="fa fa-check"></i> Kaydet</button>
-                                    <a href="hizmetler?statu=ok"><button type="button" class="btn btn-sm btn-alt-danger"><i class="fa fa-close"></i> İptal</button></a>
+                                    <a href="haber?statu=ok"><button type="button" class="btn btn-sm btn-alt-danger"><i class="fa fa-close"></i> İptal</button></a>
                                 </div>
                             </div>
                         </div>
@@ -707,7 +707,7 @@ $contentID = $_GET['id'];
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label" >Video</label>
                             <div class="col-lg-8">
-                                <input type="text" class="form-control" name="video" placeholder="Lütfen Doldurun">
+                                <input type="text" class="form-control" name="video" placeholder="Lütfen Doldurun" value="<?= $result['video'] ?>">
                             </div>
                             <div class="col-lg-2" style="display: flex;">
                                 <label class="css-control css-control-warning css-switch">
@@ -719,10 +719,10 @@ $contentID = $_GET['id'];
                         </div>
                         <!-- üst kategori seçme alanı -->
                         <div class="form-group row">
-                            <label class="col-lg-2 col-form-label">Üst Kategori</label>
+                            <label class="col-lg-2 col-form-label">Kategori</label>
                             <div class="col-lg-4">
                                 <select id="edit-services-category"  class="form-control" name="kategori_id" >
-                                    <option value="">Üst kategori seçimi yapın</option>
+                                    <option value="">Kategori seçimi yapın</option>
                                     <?php 
                                             
                                     #Sayfa bilgilerini database den çek
@@ -740,24 +740,24 @@ $contentID = $_GET['id'];
                             </div>
                         </div>
                         <!-- alt kategori seçme alanı -->
-                        <div class="form-group row">
+                        <!--<div class="form-group row">
                             <label class="col-lg-2 col-form-label">Alt Kategori</label>
                             <div class="col-lg-4">
                                 <select id="edit-services-sub-category"  class="form-control" name="alt_kategori_id">
-                                    <?php 
+                                    <?php /*
                                     $cat_id = $result['kategori_id'];
                                     $getData = $db->prepare("SELECT * FROM tbl_hizmet_alt_kategori WHERE kategori_id=$cat_id AND aktif=1 ORDER BY sira ASC");
                                     $getData->execute();
                                             
-                                    while ($getSubCat = $getData->fetch(PDO::FETCH_ASSOC)) { ?>
+                                    while ($getSubCat = $getData->fetch(PDO::FETCH_ASSOC)) { */?>
         
-                                    <option value="<?= $getSubCat['id']?>" <?php if($result['alt_kat_id']==$getSubCat['id']) {echo "selected";} ?>> <?= $getSubCat['adi_tr']?> </option>
+                                    <option value="<?/*= $getSubCat['id']*/?>" <?php /*if($result['alt_kat_id']==$getSubCat['id']) {echo "selected";} */?>> <?/*= $getSubCat['adi_tr']*/?> </option>
         
-                                    <?php }
-                                    ?>
+                                    <?php /*}
+                                    */?>
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
                         <!-- görsel alanı -->
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label" >Görsel</label>
@@ -790,7 +790,7 @@ $contentID = $_GET['id'];
                             <div class="col-lg-2" style="display: flex;">
                                 <label class="css-control css-control-warning css-switch">
                                     <input type="checkbox" class="css-control-input" name="aktif" value="1" <?php if($result['aktif']==1){echo "checked";} ?>>
-                                    <span class="css-control-indicator"></span> Hizmet Aktif
+                                    <span class="css-control-indicator"></span> Haber Aktif
                                 </label>
                             </div>
                             
@@ -803,7 +803,7 @@ $contentID = $_GET['id'];
                             <div class="block-options">
                                 <div class="block-options-item">
                                     <button type="submit" name="edit" class="btn btn-sm btn-alt-primary"><i class="fa fa-check"></i> Kaydet</button>
-                                    <a href="hizmetler?statu=ok"><button type="button" class="btn btn-sm btn-alt-danger"><i class="fa fa-close"></i> İptal</button></a>
+                                    <a href="haber?statu=ok"><button type="button" class="btn btn-sm btn-alt-danger"><i class="fa fa-close"></i> İptal</button></a>
                                 </div>
                             </div>
                         </div>
@@ -820,7 +820,7 @@ $contentID = $_GET['id'];
                 <div class="block-header block-header-default">
                     <h3 class="block-title">İÇERİK DÜZENLEME</h3>
                     <div class="block-options">
-                        <a href="hizmetler"> <button class="btn btn-sm btn-hero btn-outline-secondary"> GERİ DÖN</button></a>
+                        <a href="haber"> <button class="btn btn-sm btn-hero btn-outline-secondary"> GERİ DÖN</button></a>
                     </div>
                 </div>
                 <div class="block-content">
@@ -851,7 +851,7 @@ $contentID = $_GET['id'];
                     <div class="options-container fx-item-zoom-in fx-overlay-zoom-in" style=" height: 200px; background-image: url(../../uploads/<?= $result["gorsel"] ?>); background-size: cover;">
                         <div class="options-overlay bg-black-op">
                             <div class="options-overlay-content">
-                                <a class="btn btn-sm btn-rounded btn-alt-danger min-width-75" href="../operations/controllers/imageUploadController?perform=deleteImage&id=<?= $result["id"]?>&contentID=<?= $result["hizmet_id"] ?>&pageName=hizmet">
+                                <a class="btn btn-sm btn-rounded btn-alt-danger min-width-75" href="../operations/controllers/imageUploadController?perform=deleteImage&id=<?= $result["id"]?>&contentID=<?= $result["hizmet_id"] ?>&pageName=haber">
                                     <i class="fa fa-times"></i> Sil
                                 </a>
                             </div>

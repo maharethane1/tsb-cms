@@ -167,15 +167,15 @@ if ( isset($_POST['add']) ) {
             
             #Log kaydetme işlemi başarılı ise geri dön
             if($saveLog){
-                Header("Location: ../../views/hizmet?statu=ok");
+                Header("Location: ../../views/haber?statu=ok");
             }else{
-                Header("Location: ../../views/hizmet?statu=logNo");
+                Header("Location: ../../views/haber?statu=logNo");
             }
 
             
         } else {
 
-            Header("Location: ../../views/hizmet?statu=no");
+            Header("Location: ../../views/haber?statu=no");
         }
     }catch (PDOException $e) {
         echo $e->getMessage();
@@ -343,15 +343,15 @@ if ( isset($_POST['add']) ) {
             
             #Log kaydetme işlemi başarılı ise geri dön
             if($saveLog){
-                Header("Location: ../../views/hizmet?statu=ok");
+                Header("Location: ../../views/haber?statu=ok");
             }else{
-                Header("Location: ../../views/hizmet?statu=logNo");
+                Header("Location: ../../views/haber?statu=logNo");
             }
 
             
         } else {
 
-            Header("Location: ../../views/hizmet?statu=no");
+            Header("Location: ../../views/haber?statu=no");
         }
     }catch (PDOException $e) {
         echo $e->getMessage();
@@ -391,19 +391,19 @@ if ($_GET["perform"] == "delete") {
         
         #Log kaydetme işlemi başarılı ise geri dön
         if($saveLog){
-            Header("Location: ../../views/hizmet?statu=ok");
+            Header("Location: ../../views/haber?statu=ok");
         }else{
-            Header("Location: ../../views/hizmet?statu=logNo");
+            Header("Location: ../../views/haber?statu=logNo");
         }
 
         if($saveLog) {
-            header("Location: ../../views/hizmet?statu=ok");
+            header("Location: ../../views/haber?statu=ok");
         }else{
-            header("Location: ../../views/hizmet?statu=logNo");
+            header("Location: ../../views/haber?statu=logNo");
         }
 
     }else{
-        header("Location: ../../views/hizmet?statu=no");
+        header("Location: ../../views/haber?statu=no");
     }
 
 }

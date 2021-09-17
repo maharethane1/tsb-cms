@@ -19,5 +19,4 @@ try {
     #Bağlantı hatası
     echo "Bir Hata Oluştu: " . $e->getMessage();
 }
-
 ?> 

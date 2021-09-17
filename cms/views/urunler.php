@@ -108,7 +108,7 @@ $controllerName="urunler";
                             <tr>
                                 <th class="text-center d-none d-sm-table-cell">Dil Durum</th>
                                 <th>Ürün Adı</th>
-                                <th class="d-none d-sm-table-cell">Kategori/Alt Kategori</th>
+                                <!--<th class="d-none d-sm-table-cell">Kategori/Alt Kategori</th>-->
                                 <th class="d-none d-sm-table-cell">Durum</th>
                                 <th class="text-center" style="width: 15%;">İşlem</th>
                                 <th class="text-center" style="width: 5%;">Taşı</th>
@@ -133,7 +133,7 @@ $controllerName="urunler";
                                         <span class="badge  <?php if ($getData['aktif_ar'] == 1) {echo "badge-success";} else {echo "badge-danger";} ?>">AR</span>
                                     </td>
                                     <td class="font-w600"><?= $getData['adi_tr'] ?> </td>
-                                    <td class="font-w600 d-none d-sm-table-cell"><?= $getData["kategori_adi"] ?> <?php if(isset($getData['alt_kat_adi'])){ echo "/ ".$getData['alt_kat_adi'];} ?> </td>
+                                    <!--<td class="font-w600 d-none d-sm-table-cell"><?/*= $getData["kategori_adi"] */?> <?php /*if(isset($getData['alt_kat_adi'])){ echo "/ ".$getData['alt_kat_adi'];} */?> </td>-->
                                     <td class="font-w600 d-none d-sm-table-cell"><span class="badge  <?php if($getData['aktif']==1){echo "badge-info";}elseif($getData['aktif']==0){echo "badge-danger";} ?>"><?php if($getData['aktif']==1){echo "Aktif";}elseif($getData['aktif']==0){echo "Pasif";} ?></span></td>
                                     <td class="text-center">
                                         <div class="btn-group">
@@ -403,42 +403,42 @@ $controllerName="urunler";
                         </div>
                         
                         <!-- ürün fiyatı alanı -->
-                        <div class="form-group row">
+                        <!--<div class="form-group row">
                             <label class="col-lg-2 col-form-label" >Fiyat</label>
                             <div class="col-lg-4">
                                 <input type="number" step=".01" class="form-control fiyat" name="fiyat" placeholder="0,00" >
                             </div>
-                        </div>
+                        </div>-->
                         <!-- üst kategori seçme alanı -->
-                        <div class="form-group row">
+                        <!--<div class="form-group row">
                             <label class="col-lg-2 col-form-label">Üst Kategori</label>
                             <div class="col-lg-4">
                                 <select id="category"  class="form-control" name="kategori_id" required>
                                 <option value=""> Üst kategori seçimi yapın... </option>
-                                    <?php 
+                                    <?php /*
                                             
                                     #Sayfa bilgilerini database den çek
                                     $getData = $db->prepare("SELECT * FROM tbl_ana_kategori WHERE aktif=1 ORDER BY sira ASC");
                                     $getData->execute();
                                             
-                                    while ($getCat = $getData->fetch(PDO::FETCH_ASSOC)) { ?>
+                                    while ($getCat = $getData->fetch(PDO::FETCH_ASSOC)) { */?>
 
-                                    <option value="<?= $getCat['id']?>"> <?= $getCat['adi_tr']?> </option>
+                                    <option value="<?/*= $getCat['id']*/?>"> <?/*= $getCat['adi_tr']*/?> </option>
 
-                                    <?php }
-                                    ?>
+                                    <?php /*}
+                                    */?>
                                             
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
                         <!-- alt kategori seçme alanı -->
-                        <div class="form-group row">
+                        <!--<div class="form-group row">
                             <label class="col-lg-2 col-form-label">Alt Kategori</label>
                             <div class="col-lg-4">
                                 <select id="sub-category"  class="form-control" name="alt_kategori_id">
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label">Görsel</label>
                             <div class="col-lg-4">
@@ -446,6 +446,16 @@ $controllerName="urunler";
                                 <div class="custom-file">
                                     <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
                                     <input type="file" class="custom-file-input" name="resim" size="42" accept="image/*" data-toggle="custom-file-input" oninput="imgSlider()">
+                                    <label class="custom-file-label">Bir dosya seçin</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label">Döküman</label>
+                            <div class="col-lg-4">
+                                <div class="custom-file">
+                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
+                                    <input type="file" class="custom-file-input" name="dokuman" size="42" accept=".doc, .docx, .xls, .xlsx, .pdf" data-toggle="custom-file-input">
                                     <label class="custom-file-label">Bir dosya seçin</label>
                                 </div>
                             </div>
@@ -724,43 +734,43 @@ $controllerName="urunler";
                     </div>
                     
                     <!-- ürün fiyatı alanı -->
-                    <div class="form-group row">
+                    <!--<div class="form-group row">
                         <label class="col-lg-2 col-form-label" >Fiyat</label>
                         <div class="col-lg-4">
-                            <input type="number" step=".01" class="form-control fiyat" name="fiyat" value="<?= $result['fiyat'] ?>" >
+                            <input type="number" step=".01" class="form-control fiyat" name="fiyat" value="<?/*= $result['fiyat'] */?>" >
                         </div>
-                    </div>
+                    </div>-->
 
                     <!-- üst kategori seçme alanı -->
-                    <div class="form-group row">
+                    <!--<div class="form-group row">
                         <label class="col-lg-2 col-form-label">Üst Kategori</label>
                         <div class="col-lg-4">
                             <select id="edit-category"  class="form-control" name="kategori_id" required>
                                 <option value=""> Üst kategori seçimi yapın... </option>
-                                <?php 
+                                <?php /*
                                             
                                 #üst kategori bilgilerini database den çek
                                 $getData = $db->prepare("SELECT * FROM tbl_ana_kategori WHERE aktif=1 ORDER BY sira ASC");
                                 $getData->execute();
                                             
-                                while ($getCat = $getData->fetch(PDO::FETCH_ASSOC)) { ?>
+                                while ($getCat = $getData->fetch(PDO::FETCH_ASSOC)) { */?>
 
-                                <option value="<?= $getCat['id']?>" <?php if($result['kategori_id']==$getCat['id']){echo "selected";} ?>> <?= $getCat['adi_tr']?> </option>
+                                <option value="<?/*= $getCat['id']*/?>" <?php /*if($result['kategori_id']==$getCat['id']){echo "selected";} */?>> <?/*= $getCat['adi_tr']*/?> </option>
 
-                                <?php }
-                                ?>
+                                <?php /*}
+                                */?>
                                         
                             </select>
                         </div>
-                    </div>
+                    </div>-->
 
                     <!-- alt kategori seçme alanı -->
-                    <div class="form-group row">
+                    <!--<div class="form-group row">
                         <label class="col-lg-2 col-form-label">Alt Kategori</label>
                         <div class="col-lg-4">
                             <select id="edit-sub-category"  class="form-control" name="alt_kat_id">
                             <option value=""> Alt kategori seçimi yapılmadı.. </option>
-                            <?php 
+                            <?php /*
                                             
                              #alt kategori bilgilerini database den çek
                              $catID = $result['kategori_id'];
@@ -768,15 +778,15 @@ $controllerName="urunler";
                              $getSubCatData = $db->prepare("SELECT * FROM tbl_alt_kategori WHERE kategori_id=? and aktif=1 ORDER BY sira ASC");
                              $getSubCatData->execute(array($catID));
                                                         
-                             while ($getSubCat = $getSubCatData->fetch(PDO::FETCH_ASSOC)) { ?>
+                             while ($getSubCat = $getSubCatData->fetch(PDO::FETCH_ASSOC)) { */?>
             
-                             <option value="<?= $getSubCat['id']?>" <?php if($subCatID==$getSubCat['id']) {echo "selected";}?> > <?= $getSubCat['adi_tr']?> </option>
+                             <option value="<?/*= $getSubCat['id']*/?>" <?php /*if($subCatID==$getSubCat['id']) {echo "selected";}*/?> > <?/*= $getSubCat['adi_tr']*/?> </option>
             
-                             <?php }
-                             ?>
+                             <?php /*}
+                             */?>
                             </select>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label">Görsel</label>
                         <div class="col-lg-4">
@@ -796,6 +806,24 @@ $controllerName="urunler";
                                 <label class="custom-file-label">Bir dosya seçin</label>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label">Döküman</label>
+                        <div class="col-lg-4">
+                            <div class="custom-file">
+                                <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
+                                <a href="<?="../../uploads/".$result['dokuman']?>"></a>
+                                <input type="file" class="custom-file-input" name="dokuman" size="42" accept=".doc, .docx, .xls, .xlsx, .pdf" data-toggle="custom-file-input">
+                                <input type="hidden" name="old-document" value="<?=$result['dokuman']?>">
+                                <label class="custom-file-label">Bir dosya seçin</label>
+                            </div>
+                        </div>
+                        <?php if ($result['dokuman'] !==NUL) { ?>
+                            <div class="col-lg-6">
+                                <a target="_blank" href="<?="../../uploads/".$result['dokuman']?>">Mevcut Dökümanı Görüntüle</a>
+                            </div>
+                        <?php }
+                        ?>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label">Aktif</label>
